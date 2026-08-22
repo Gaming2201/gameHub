@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CYBER SNAKE 2077 | Arcade Edition</title>
+  
+  <!-- FontAwesome Icons for UI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts for Gaming Feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet (बाद में जोड़ेंगे) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Glowing Background Effects -->
+  <div class="bg-glow"></div>
+
+  <!-- Main Arcade Container -->
+  <div class="game-wrapper">
+    
+    <!-- Header Section -->
+    <header class="game-header">
+      <div class="logo">
+        <i class="fa-solid fa-staff-snake logo-icon"></i>
+        <span>CYBER</span> SNAKE
+      </div>
+      <div class="badge">PRO ARCADE</div>
+    </header>
+
+    <!-- Scoreboards & Stat Dashboard -->
+    <div class="dashboard">
+      <div class="stat-card">
+        <i class="fa-solid fa-trophy stat-icon gold"></i>
+        <div class="stat-info">
+          <span class="label">HIGH SCORE</span>
+          <span id="highScore" class="value">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <i class="fa-solid fa-star stat-icon cyan"></i>
+        <div class="stat-info">
+          <span class="label">SCORE</span>
+          <span id="currentScore" class="value">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <i class="fa-solid fa-bolt stat-icon purple"></i>
+        <div class="stat-info">
+          <span class="label">LEVEL</span>
+          <span id="currentLevel" class="value">1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas Area & Screen Overlays -->
+    <div class="canvas-container">
+      <!-- Snake Game Canvas -->
+      <canvas id="gameCanvas" width="500" height="500"></canvas>
+      
+      <!-- Start Screen Overlay -->
+      <div id="startOverlay" class="overlay">
+        <div class="overlay-content">
+          <i class="fa-solid fa-gamepad main-icon"></i>
+          <h1>READY TO PLAY?</h1>
+          <p>Eat apples, level up, and dodge the walls!</p>
+          <button id="startBtn" class="btn-primary">START GAME</button>
+        </div>
+      </div>
+
+      <!-- Game Over Screen Overlay -->
+      <div id="gameOverOverlay" class="overlay hidden">
+        <div class="overlay-content">
+          <i class="fa-solid fa-skull-crossbones skull-icon"></i>
+          <h1 class="danger-text">GAME OVER</h1>
+          <p>Final Score: <span id="finalScore">0</span></p>
+          <button id="restartBtn" class="btn-primary">PLAY AGAIN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Controls & Items Guide -->
+    <div class="controls-guide">
+      <div class="guide-item">
+        <i class="fa-solid fa-keyboard"></i> Use <strong>Arrow Keys</strong> or <strong>W A S D</strong>
+      </div>
+      <div class="legend">
+        <span><i class="fa-solid fa-circle red-dot"></i> Apple (+10)</span>
+        <span><i class="fa-solid fa-star gold-dot"></i> Golden (+50)</span>
+        <span><i class="fa-solid fa-bolt blue-dot"></i> Slow-Mo</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript File (बाद में जोड़ेंगे) -->
+  <script src="script.js"></script>
+</body>
+</html>

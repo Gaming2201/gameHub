@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pac-Man Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>PAC-MAN</h1>
+    <div class="score-board">SCORE: <span id="score">0</span></div>
+    <canvas id="gameCanvas" width="440" height="440"></canvas>
+  </div>
+
+  <!-- Game Over / Win Pop-up Modal -->
+  <div id="gameModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modalTitle">GAME OVER</h2>
+      <p>your score: <span id="finalScore">0</span></p>
+      <button onclick="restartGame()">Try Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
