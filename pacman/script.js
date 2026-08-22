@@ -213,6 +213,17 @@ function update() {
     if (dist < 12) {
       playGameOverSound();
       showGameOverModal("GAME OVER");
+      // बटन्स को क्लिक या टच करने पर Pac-Man की दिशा बदलो
+document.getElementById('btn-up').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('up'); });
+document.getElementById('btn-down').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('down'); });
+document.getElementById('btn-left').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('left'); });
+document.getElementById('btn-right').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('right'); });
+
+// Normal Click For Testing on PC
+document.getElementById('btn-up').addEventListener('click', () => changeDirection('up'));
+document.getElementById('btn-down').addEventListener('click', () => changeDirection('down'));
+document.getElementById('btn-left').addEventListener('click', () => changeDirection('left'));
+document.getElementById('btn-right').addEventListener('click', () => changeDirection('right'));
     }
   });
 }
@@ -272,6 +283,7 @@ function draw() {
     ctx.fill();
   });
 }
+
 
 function gameLoop() {
   update();

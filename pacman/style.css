@@ -98,3 +98,49 @@ canvas {
   from { transform: scale(0.5); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+/* गेम एरिया में टच स्वाइप से पेज स्क्रॉल बंद करने के लिए */
+canvas, .touch-controls {
+  touch-action: none;
+}
+
+/* टच बटन्स की स्टाइलिंग */
+.touch-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.horizontal-btns {
+  display: flex;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.dbtn {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  background-color: #222;
+  color: #fff;
+  border: 2px solid #ffb8ae;
+  border-radius: 50%;
+  user-select: none;
+}
+
+.dbtn:active {
+  background-color: #ffb8ae;
+  color: #000;
+}
+
+/* मोबाइल टच बटन्स को इनविजिबल (छिपाने) के लिए */
+.dbtn {
+  background-color: transparent !important; /* बटन का बैकग्राउंड गायब */
+  border: none !important;                  /* बटन का बॉर्डर गायब */
+  color: transparent !important;            /* तीर का निशान (Emoji) पूरी तरह गायब */
+  width: 60px;                              /* क्लिक करने के लिए एरिया उतना ही बड़ा रहेगा */
+  height: 60px;
+  cursor: pointer;
+}
+
