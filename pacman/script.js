@@ -224,6 +224,36 @@ document.getElementById('btn-up').addEventListener('click', () => changeDirectio
 document.getElementById('btn-down').addEventListener('click', () => changeDirection('down'));
 document.getElementById('btn-left').addEventListener('click', () => changeDirection('left'));
 document.getElementById('btn-right').addEventListener('click', () => changeDirection('right'));
+
+// ==========================================
+// Mobile Touch Controls (Fix for Mobile Touch)
+// ==========================================
+const btnUp = document.getElementById('btn-up');
+const btnDown = document.getElementById('btn-down');
+const btnLeft = document.getElementById('btn-left');
+const btnRight = document.getElementById('btn-right');
+
+function triggerKey(keyName) {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: keyName }));
+}
+
+if (btnUp && btnDown && btnLeft && btnRight) {
+    // Up Button
+    btnUp.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowUp'); });
+    btnUp.addEventListener('click', () => triggerKey('ArrowUp'));
+
+    // Down Button
+    btnDown.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowDown'); });
+    btnDown.addEventListener('click', () => triggerKey('ArrowDown'));
+
+    // Left Button
+    btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowLeft'); });
+    btnLeft.addEventListener('click', () => triggerKey('ArrowLeft'));
+
+    // Right Button
+    btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowRight'); });
+    btnRight.addEventListener('click', () => triggerKey('ArrowRight'));
+}
     }
   });
 }
@@ -284,6 +314,37 @@ function draw() {
   });
 }
 
+// ==========================================
+// PC + MOBILE UNIVERSAL CONTROLS
+// ==========================================
+
+function movePacman(directionKey) {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: directionKey }));
+}
+
+const controls = [
+    { id: 'btn-up', key: 'ArrowUp' },
+    { id: 'btn-down', key: 'ArrowDown' },
+    { id: 'btn-left', key: 'ArrowLeft' },
+    { id: 'btn-right', key: 'ArrowRight' }
+];
+
+controls.forEach(control => {
+    const btn = document.getElementById(control.id);
+    if (btn) {
+        // मोबाइल टच सपोर्ट
+        btn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            movePacman(control.key);
+        });
+
+        // PC माउस क्लिक सपोर्ट
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            movePacman(control.key);
+        });
+    }
+});
 
 function gameLoop() {
   update();

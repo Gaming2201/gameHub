@@ -261,3 +261,25 @@ function handleGameOver() {
   finalScoreEl.innerText = score;
   gameOverOverlay.classList.remove('hidden');
 }
+
+// Touch Controls for Mobile Devices
+document.getElementById('btn-up').addEventListener('click', () => {
+  if (dy === 0) {
+    dx = 0;
+    dy = -gridSize;
+  }});
+document.getElementById('btn-down').addEventListener('click', () => {
+  if (dy === 0) {
+    dx = 0;
+    dy = gridSize;
+  }});
+document.getElementById('btn-left').addEventListener('click', () => {
+  if (dx === 0) {
+    dx = -gridSize;
+    dy = 0;
+  }});
+document.getElementById('btn-right').addEventListener('click', () => {
+  if (dx === 0) {
+    dx = gridSize;
+    dy = 0;
+  }});

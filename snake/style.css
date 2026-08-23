@@ -230,3 +230,28 @@ body {
 .red-dot { color: #ff0055; }
 .gold-dot { color: #ffbd00; }
 .blue-dot { color: #00f3ff; }
+
+* {
+    touch-action: none; /* स्क्रीन को हिलने से रोकता है */
+}
+.touch-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+}
+.horizontal-btns {
+    display: flex;
+    gap: 40px;
+}
+.dbtn {
+    background: #1f293d;
+    border: 2px solid #00ffcc;
+    color: #fff;
+    font-size: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+}

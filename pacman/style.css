@@ -134,13 +134,3 @@ canvas, .touch-controls {
   color: #000;
 }
 
-/* मोबाइल टच बटन्स को इनविजिबल (छिपाने) के लिए */
-.dbtn {
-  background-color: transparent !important; /* बटन का बैकग्राउंड गायब */
-  border: none !important;                  /* बटन का बॉर्डर गायब */
-  color: transparent !important;            /* तीर का निशान (Emoji) पूरी तरह गायब */
-  width: 60px;                              /* क्लिक करने के लिए एरिया उतना ही बड़ा रहेगा */
-  height: 60px;
-  cursor: pointer;
-}
-
