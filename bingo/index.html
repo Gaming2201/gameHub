@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./style.css">
+  <script src="/Functions.js" defer></script>
+  <title >Battleship Game </title>
+</head>
+<body>
+  <h1 style="font-size: 40px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Battleship Game</h1>
+  <p id="message" style="font-size: large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Click on the AI's board to attack!</p>
+
+  <!-- Sound effects -->
+  <audio id="explosion-sound" src="/sounds.js/explosion-312361.mp3" preload="auto"></audio>
+  <audio id="water-drop-sound" src="/sounds.js/mixkit-fish-flapping-2457.wav" preload="auto"></audio>
+  <audio id="bump-sound" src="sounds.js/mixkit-epic-impact-afar-explosion-2782.wav" preload="auto"></audio>
+  <audio id="ai-hit-sound" src="/sounds.js/explosion-01.wav" preload="auto"></audio>
+  <audio id="win-sound" src="sounds.js/mixkit-winning-notification-2018.wav"></audio>
+<audio id="lose-sound" src="sounds.js/game-over-arcade-6435.mp3"></audio>
+<audio id="start-sound" src="sounds.js/starting.mp3" preload="auto"></audio>
+
+
+
+  <div id="bump-section">
+    <button id="use-bump" style="background-color: orange;">💣 Use Bump (x<span id="bump-count">2</span>)</button>
+  </div>
+
+  <div class="board-container" id="game-area">
+    <div>
+      <h2>Your Boats</h2>
+      <table id="player-board"></table>
+    </div>
+    <div>
+      <h2>Enemy Boats</h2>
+      <table id="ai-board"></table>
+    </div>
+  </div>
+
+  <!-- ✂️ OMITTED: Use your original <head> and style sections (unchanged) -->
+
+    <div id="rules">
+    <h3 style="text-align: center;">Game Rules:</h3>
+    <ul>
+      <li>Ships are placed horizontally or vertically.</li>
+      <li>No diagonal, overlapping, or adjacent ships.</li>
+      <li>Your board shows your ships and AI attacks.</li>
+      <li>💥 Sound on hit, 💧 sound on miss, 💀 emoji when ship is sunk.</li>
+      <li>Background color shows whose turn it is.</li>
+      <li>Earn a "bump" every 10 turns to blast a 3x3 area.</li>
+    </ul>
+  </div>

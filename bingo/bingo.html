@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Bingo Game</title>
+<link rel="stylesheet" href="bingo.css" />
+<style>
+ 
+
+</style>
+</head>
+<body>
+<div id="welcome-section">
+  <h2>Welcome to the Bingo Game!</h2>
+  <p>Try to complete a full row or column by marking numbers correctly. Click the "Draw" button to randomly draw a number, then find it on the grid and click to mark it. If you click a number that isn't the drawn number, you'll get a warning. After 3 wrong attempts, the game ends. Good luck and have fun!</p>
+ 
+ <a><a href="page2.html"></a>
+   <button id="start-game-button" type="button">Start to Play</button>
+
+ </a>
+ 
+</div>
+
+<div id="container">
+  <h1>Bingo Game</h1>
+  <div id="drawn-number-container">
+    <div id="drawn-number-label">Drawn Number:</div>
+    <div id="drawn-number">---</div>
+  </div>
+  <button id="draw-button" type="button">Draw</button>
+  <div id="message"></div>
+  <table id="bingo-table" aria-label="Bingo Number Grid"></table>
+</div>
+
+<script src="bingo.js"></script>
+<script>
+  
+  document.getElementById('start-game-button').addEventListener('click', () => {
+    document.getElementById('container').scrollIntoView({behavior: 'smooth'});
+  });
+</script>
+</body>
+</html>
+
+<script>
+  
+  document.getElementById('start-game-button').addEventListener('click', () => {
+    document.getElementById('welcome-section').style.display = 'none';
+    document.getElementById('container').style.display = 'block';
+    document.getElementById('container').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  
+  document.getElementById('container').style.display = 'none';
+</script>
+<style>
+  #welcome-section {
+    text-align: center;
+    padding: 50px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 600px;
+  }
+
+  #welcome-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+
+  #welcome-section p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  #start-game-button {
+    background: #ff6f61;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  #start-game-button:hover {
+    background: #e55b50;
+  }
+</style>
+<script>
+  function checkGameEnd() {
+    const rows = document.querySelectorAll('#bingo-table tr');
+    let isGameOver = false;
+
+    // Check rows for completion
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if ([...cells].every(cell => cell.classList.contains('marked'))) {
+        isGameOver = true;
+      }
+    });
+
+    // Check columns for completion
+    for (let col = 0; col < rows[0].children.length; col++) {
+      let columnComplete = true;
+      rows.forEach(row => {
+        if (!row.children[col].classList.contains('marked')) {
+          columnComplete = false;
+        }
+      });
+      if (columnComplete) {
+        isGameOver = true;
+      }
+    }
+
+    if (isGameOver) {
+      document.getElementById('message').textContent = 'Congratulations! You completed the Bingo!';
+      document.getElementById('draw-button').disabled = true;
+    }
+  }
+
+  document.getElementById('bingo-table').addEventListener('click', (event) => {
+    if (event.target.tagName === 'TD') {
+      event.target.classList.add('marked');
+      checkGameEnd();
+    }
+  });
+</script>
+<style>
+  .marked {
+    background-color: #4caf50;
+    color: white;
+  }
+</style>
+<script>
+(() => {
+    const TABLE_SIZE = 7;
+    const NUMBER_MIN = 1;
+    const NUMBER_MAX = 100;
+    const MAX_WRONG_CLICKS = 3;
+  
+    let bingoNumbers = [];
+    let drawnNumber = null;
+    let markedCells = new Set();
+    let wrongClicks = 0;
+    let gameEnded = false;
+  
+    const tableElement = document.getElementById('bingo-table');
+    const drawnNumberElement = document.getElementById('drawn-number');
+    const drawButton = document.getElementById('draw-button');
+    const messageElement = document.getElementById('message');
+  
+    function generateUniqueNumbers(count, min, max) {
+      const numberSet = new Set();
+      while (numberSet.size < count) {
+        const randNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        numberSet.add(randNum);
+      }
+      return Array.from(numberSet);
+    }
+  
+    function generateBingoGrid() {
+      const totalNumbers = TABLE_SIZE * TABLE_SIZE;
+      const uniqueNumbers = generateUniqueNumbers(totalNumbers, NUMBER_MIN, NUMBER_MAX);
+      bingoNumbers = [];
+      let index = 0;
+      for (let r = 0; r < TABLE_SIZE; r++) {
+        let row = [];
+        for (let c = 0; c < TABLE_SIZE; c++) {
+          row.push(uniqueNumbers[index++]);
+        }
+        bingoNumbers.push(row);
+      }
+    }
+  
+    function renderTable() {
+      tableElement.innerHTML = '';
+      for (let r = 0; r < TABLE_SIZE; r++) {
+        const rowElem = document.createElement('tr');
+        for (let c = 0; c < TABLE_SIZE; c++) {
+          const cell = document.createElement('td');
+          cell.textContent = bingoNumbers[r][c];
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          cell.setAttribute('tabindex', '0');
+          cell.setAttribute('role', 'button');
+          cell.setAttribute('aria-pressed', 'false');
+          cell.title = 'Click to mark this number';
+          cell.addEventListener('click', onCellClick);
+          cell.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              cell.click();
+            }
+          });
+          rowElem.appendChild(cell);
+        }
+        tableElement.appendChild(rowElem);
+      }
+    }
+  
+    function onCellClick(e) {
+      if (gameEnded) {
+        showMessage('Game is over. Please refresh to play again.', true);
+        return;
+      }
+      if (drawnNumber === null) {
+        showMessage('Draw a number first by clicking the Draw button.', true);
+        return;
+      }
+      const cell = e.currentTarget;
+      const r = parseInt(cell.dataset.row, 10);
+      const c = parseInt(cell.dataset.col, 10);
+      const cellNumber = bingoNumbers[r][c];
+  
+      if (markedCells.has(`${r}-${c}`)) {
+        showMessage('This number is already marked.', true);
+        return;
+      }
+  
+      if (cellNumber === drawnNumber) {
+        markCell(cell, r, c);
+        showMessage('');
+        checkWin(r, c);
+      } else {
+        wrongClicks++;
+        showMessage(`Number ${cellNumber} was not drawn! Mistakes: ${wrongClicks} / ${MAX_WRONG_CLICKS}`, true);
+        if (wrongClicks >= MAX_WRONG_CLICKS) {
+          gameEnded = true;
+          showMessage('You have made 3 incorrect attempts. You lost! Refresh to try again.', true);
+          disableAllCells();
+          drawButton.disabled = true;
+        }
+      }
+    }
+  
+    function markCell(cell, row, col) {
+      cell.classList.add('marked');
+      cell.setAttribute('aria-pressed', 'true');
+      markedCells.add(`${row}-${col}`);
+    }
+  
+    function checkWin(markedRow, markedCol) {
+      let rowComplete = true;
+      for (let col = 0; col < TABLE_SIZE; col++) {
+        if (!markedCells.has(`${markedRow}-${col}`)) {
+          rowComplete = false;
+          break;
+        }
+      }
+  
+      let colComplete = true;
+      for (let row = 0; row < TABLE_SIZE; row++) {
+        if (!markedCells.has(`${row}-${markedCol}`)) {
+          colComplete = false;
+          break;
+        }
+      }
+  
+      if (rowComplete || colComplete) {
+        gameEnded = true;
+        showMessage('Congratulations! You completed a ' + (rowComplete ? 'row' : 'column') + ' and won the game!', false);
+        disableAllCells();
+        drawButton.disabled = true;
+      }
+    }
+  
+    function showMessage(text, isError) {
+      messageElement.textContent = text;
+      if (isError) {
+        messageElement.style.color = '#ffbaba';
+      } else {
+        messageElement.style.color = '#aaffaa';
+      }
+    }
+    
+  
+    function disableAllCells() {
+      const cells = tableElement.querySelectorAll('td');
+      cells.forEach(cell => {
+        cell.style.pointerEvents = 'none';
+        cell.setAttribute('aria-disabled', 'true');
+        cell.setAttribute('tabindex', '-1');
+      });
+    }
+  
+    function onDrawClick() {
+      if (gameEnded) {
+        showMessage('Game is over. Refresh to play again.', true);
+        return;
+      }
+      drawnNumber = drawRandomNumber();
+      drawnNumberElement.textContent = drawnNumber;
+      showMessage('Number drawn. Click it on the board!', false);
+    }
+  
+    function drawRandomNumber() {
+      const flatNumbers = bingoNumbers.flat();
+      return flatNumbers[Math.floor(Math.random() * flatNumbers.length)];
+    }
+  
+    function initGame() {
+      generateBingoGrid();
+      renderTable();
+      markedCells.clear();
+      wrongClicks = 0;
+      gameEnded = false;
+      drawnNumber = null;
+      drawnNumberElement.textContent = '---';
+      showMessage('');
+      drawButton.disabled = false;
+    }
+  
+    drawButton.addEventListener('click', onDrawClick);
+  
+    initGame();
+  })();
+  </script>
+
+  <style>
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px 10px 30px;
+  }
+  h1 {
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+  #container {
+    max-width: 370px;
+    width: 100%;
+    max-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #drawn-number-container {
+    margin: 15px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: #3b3b6b;
+    padding: 12px 20px;
+    border-radius: 10px;
+    min-width: 150px;
+    user-select: none;
+  }
+  #drawn-number-label {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    color: #b0b0d8;
+  }
+  #draw-button {
+    background-color: #ff6f91;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  #draw-button:disabled {
+    background-color: #a07a89;
+    cursor: not-allowed;
+  }
+  #draw-button:hover:not(:disabled) {
+    background-color: #ff3366;
+  }
+  #message {
+    min-height: 24px;
+    margin-bottom: 14px;
+    font-weight: 600;
+    color: #ffbaba;
+    text-align: center;
+    letter-spacing: 0.8px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 370px;
+    table-layout: fixed;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    user-select: none;
+  }
+  th, td {
+    border: 2px solid #56236a;
+    padding: 8px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  td.marked {
+    background-color: #42d392;
+    color: #072b14;
+    font-weight: 700;
+    cursor: default;
+    position: relative;
+  }
+  td.marked::after {
+    content: "✕";
+    position: absolute;
+    right: 6px;
+    top: 2px;
+    font-size: 1.2rem;
+    color: #072b14;
+    font-weight: 900;
+  }
+  td:not(.marked):hover {
+    background-color: #7c5295aa;
+  }
+  @media (max-width: 400px) {
+    #container {
+      max-width: 95vw;
+    }
+    th, td {
+      font-size: 0.9rem;
+      padding: 6px 0;
+    }
+    #draw-button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin-bottom: 12px;
+    }
+  }
+  </style>
