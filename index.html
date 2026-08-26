@@ -28,19 +28,25 @@
 <body>
 
   <!-- Background Effect -->
-  <div class="bg-glow"></div>
+  <div class="background-effect"></div>
 
   <!-- Main Hub Wrapper -->
   <div class="hub-container">
-    
-    <!-- Header -->
+
     <header class="hub-header">
-      <div class="logo">
+    <div class="logo">
         <i class="fa-solid fa-gamepad logo-icon"></i>
         <span>GAME</span> HUB
-      </div>
-      <p class="tagline">Select a game and start playing!</p>
-    </header>
+    </div>
+    <p class="tagline">Select a game and start playing!</p>
+
+    <!-- Search Bar with Clear (✖) Button -->
+    <div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Search or scroll games..." autocomplete="off">
+    <span id="clearSearch" class="clear-btn">&times;</span>
+    <div id="searchResults" class="search-dropdown"></div>
+</div>
+</header>
 
     <!-- Games Grid -->
     <div class="games-grid">
@@ -48,7 +54,9 @@
       <!-- Snake Game Card -->
       <div class="game-card">
         <div class="card-icon cyan">
-          <i class="fa-solid fa-staff-snake"></i>
+          <img src="assets/snake-icon.png" alt="">
+          <i class="fa-solid fa-staff-snake"></i> 
+            
         </div>
         <h3>Cyber Snake 2077</h3>
         <p>Classic snake game with neon visuals, dynamic speed levels, and power-ups.</p>
@@ -58,7 +66,9 @@
 
       <!-- Game 2 Placeholder -->
       <div class="game-card">
+   
         <div class="card-icon purple">
+          <img src="assets/pacman.png" alt="">
           <i class="fa-solid fa-ghost"></i>
         </div>
         <h3>Pac-Man Arcade</h3>
@@ -69,6 +79,7 @@
       <!-- Game 3 Placeholder -->
       <div class="game-card">
         <div class="card-icon gold">
+          <img src="assets/bingo.png" alt="">
           <i class="fa-solid fa-cubes"></i>
         </div>
         <h3>Bingo</h3>
@@ -78,15 +89,19 @@
 
       <!-- Game 4: Cyber Runner -->
         <div class="game-card">
-            <div class="card-icon">🏃</div>
-            <h3>Cyber Runner</h3>
-            <p>Jump and slide to dodge obstacles in this fast-paced neon runner!</p>
-            <a href="#" class="play-btn disabled">COMING SOON</a>
+            <div class="card-icon">
+                <img src="assets/ur.png" alt="Royal Game of Ur">
+            </div>
+            <h3>Royal Game of Ur</h3>
+            <p>A classic Mesopotamian racing board game. Strategize and race to the finish!</p>
+            <a href="https://royalur.net/game/" class="play-btn">Play Now</a>
         </div>
 
         <!-- Game 5: Tic Tac Toe AI -->
         <div class="game-card">
-            <div class="card-icon">❌⭕</div>
+            <div class="card-icon">
+                <img src="assets/tictactoe.png" alt="Tic Tac Toe">
+            </div>
             <h3>Tic Tac Toe AI</h3>
             <p>Challenge the smart AI or play with a friend in classic XO!</p>
             <a href="tictactoe/index.html" class="play-btn">Play Now</a>

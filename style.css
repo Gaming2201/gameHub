@@ -192,3 +192,136 @@ footer {
   font-size: 0.85rem;
   text-align: center;
 }
+
+/* ==========================================
+   SEARCH BAR & DROPDOWN LIST STYLING
+   ========================================== */
+.search-container {
+    position: relative;
+    margin: 20px auto 10px auto;
+    width: 100%;
+    max-width: 450px;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 242, 254, 0.3);
+    border-radius: 25px;
+    outline: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #00f2fe;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    background: rgba(15, 23, 42, 0.8);
+}
+
+/* Dropdown Menu */
+.search-dropdown {
+    position: absolute;
+    top: 105%;
+    left: 15px;
+    right: 15px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(0, 242, 254, 0.4);
+    border-radius: 12px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none; /* By default hidden rahega */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+/* Jab Dropdown open ho */
+.search-dropdown.active {
+    display: block;
+}
+
+/* List Items */
+.dropdown-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e2e8f0;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s ease;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 242, 254, 0.15);
+    color: #00f2fe;
+}
+
+/* Scrollbar Style */
+.search-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+.search-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(0, 242, 254, 0.5);
+    border-radius: 10px;
+}
+
+.search-container {
+    position: relative;
+    margin: 20px auto 10px auto;
+    width: 100%;
+    max-width: 450px;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    display: none;
+    z-index: 10;
+    transition: color 0.2s ease;
+}
+
+.clear-btn:hover {
+    color: #ff4757;
+}
+
+#searchInput {
+    padding-right: 45px;
+}
+
+/* GAME ICON CONTAINER AND IMAGE SIZE FIX */
+.card-icon {
+    position: relative;
+    width: 120px;  /* कंटेनर की चौड़ाई */
+    height: 120px; /* कंटेनर की ऊँचाई */
+    border-radius: 50%; /* इसे गोल बनाता है */
+    overflow: hidden; /* बाहर जाने वाली इमेज को काट देता है */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* बीच में सेट करता है */
+}
+
+/* IMAGE FIT INSIDE CONTAINER */
+.card-icon img {
+    width: 100%; /* इमेज की चौड़ाई गोल घेरे के बराबर */
+    height: 100%; /* इमेज की ऊँचाई गोल घेरे के बराबर */
+    object-fit: cover; /* इमेज को सही अनुपात में फिट करता है (स्ट्रेच नहीं करता) */
+}
