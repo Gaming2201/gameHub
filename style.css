@@ -325,3 +325,239 @@ footer {
     height: 100%; /* इमेज की ऊँचाई गोल घेरे के बराबर */
     object-fit: cover; /* इमेज को सही अनुपात में फिट करता है (स्ट्रेच नहीं करता) */
 }
+
+/* Sidebar Panel Styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 300px;
+  height: 100%;
+  background-color: #1a1a2e;
+  color: #fff;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  float: right;
+  cursor: pointer;
+}
+
+.profile-form {
+  margin-top: 40px;
+}
+
+.profile-form label {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.profile-form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background: #0f3460;
+  color: #fff;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 25px;
+  background-color: #e94560;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Toast Notification Style */
+.toast {
+  visibility: hidden;
+  min-width: 200px;
+  background-color: #2e7d32; /* हरा रंग success के लिए */
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.toast.error {
+  background-color: #d32f2f; /* लाल रंग error के लिए */
+}
+
+/* ==========================================
+   PREMIUM SIDEBAR & PROFILE SETTINGS STYLES
+   ========================================== */
+
+/* Sidebar Container with Blur Effect */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px; /* Hidden by default */
+  width: 320px;
+  height: 100%;
+  background: rgba(15, 15, 26, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  box-sizing: border-box;
+  transition: right 0.4s ease;
+  z-index: 1000;
+  overflow-y: auto;
+  color: #fff;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+/* Sidebar Title */
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #00f2fe;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+/* Section Title Styling */
+.section-title {
+  display: block;
+  font-size: 13px;
+  color: #ff007f;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* Avatar Selection Container */
+.avatar-options {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.avatar-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.avatar-img:hover {
+  transform: scale(1.1);
+}
+
+.avatar-img.selected {
+  border-color: #00f2fe;
+  box-shadow: 0 0 12px #00f2fe;
+  transform: scale(1.1);
+}
+
+/* Setting Dropdowns Layout */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.setting-item span {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.custom-select {
+  background: #16213e;
+  color: #00f2fe;
+  border: 1px solid #00f2fe;
+  padding: 5px 10px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Glowing Save Button */
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: linear-gradient(45deg, #ff007f, #7928ca);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 127, 0.6);
+}
+
+/* Toast Notification Styling */
+.toast {
+  visibility: hidden;
+  min-width: 100%;
+  background-color: #2e7d32;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 13px;
+  opacity: 0;
+  box-sizing: border-box;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.toast.error {
+  background-color: #d32f2f;
+}

@@ -94,7 +94,7 @@
             </div>
             <h3>Royal Game of Ur</h3>
             <p>A classic Mesopotamian racing board game. Strategize and race to the finish!</p>
-            <a href="https://royalur.net/game/" class="play-btn">Play Now</a>
+            <a href="https://royalur.net/game/" class="play-btn disabled">Block</a>
         </div>
 
         <!-- Game 5: Tic Tac Toe AI -->
@@ -107,12 +107,14 @@
             <a href="tictactoe/index.html" class="play-btn">Play Now</a>
         </div>
 
-        <!-- Game 6: Space Shooter -->
+        <!-- Game 6: Flapy bird -->
         <div class="game-card">
-            <div class="card-icon">🚀</div>
-            <h3>Space Shooter</h3>
-            <p>Defend the galaxy and blast enemy spaceships!</p>
-            <a href="#" class="play-btn disabled">COMING SOON</a>
+            <div class="card-icon">
+              <img src="assets/bird.png" alt="Flappy Bird">
+            </div>
+            <h3>Flappy Bird</h3>
+            <p>Flappy Bird is an iconic side-scrolling game.</p>
+            <a href="flappy bird/index.html" class="play-btn">Play Now</a>
         </div>
 
     </div>
@@ -124,6 +126,82 @@
 
   </div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBAqGukTau_tZ6fa3vCZg-np8FJLy0LyD0",
+    authDomain: "gamehub-6fbc6.firebaseapp.com",
+    projectId: "gamehub-6fbc6",
+    storageBucket: "gamehub-6fbc6.firebasestorage.app",
+    messagingSenderId: "586883385937",
+    appId: "1:586883385937:web:092fa524204e409a928670"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db;
+  window.doc = doc;
+  window.setDoc = setDoc;
+  window.getDoc = getDoc;
+</script>
+<!-- Top Right Menu Button & Sidebar -->
+<div class="menu-container" style="position: fixed; top: 20px; right: 25px; z-index: 999;">
+  <div class="menu-btn" id="menuBtn" style="cursor: pointer; font-size: 20px; background: #0f3460; color: white; padding: 8px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+    ☰ Menu
+  </div>
+</div>
+
+<!-- Premium Profile & Settings Sidebar -->
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <h2>My Profile & Settings</h2>
+
+  <div class="profile-form">
+    <!-- Avatar Selection Section -->
+    <label class="section-title">Choose picture</label>
+    <div class="avatar-options">
+      <img src="assets/image1.jpg" class="avatar-img selected" data-avatar="avatar1" alt="Avatar 1">
+      <img src="assets/image2.jpg" class="avatar-img" data-avatar="avatar2" alt="Avatar 2">
+      <img src="assets/image3.jpg" class="avatar-img" data-avatar="avatar3" alt="Avatar 3">
+      <img src="assets/image4.jpg" class="avatar-img" data-avatar="avatar4" alt="Avatar 4">
+    </div>
+
+    <!-- User Details Inputs -->
+    <label for="usernameInput">Gamer Tag</label>
+    <input type="text" id="usernameInput" placeholder="Enter gamer tag">
+
+    <label for="emailInput">Email Address</label>
+    <input type="email" id="emailInput" placeholder="Enter email">
+
+    <!-- Game Settings Section -->
+    <label class="section-title">Game Preferences</label>
+    
+    <div class="setting-item">
+      <span>Game Sound</span>
+      <select id="soundToggle" class="custom-select">
+        <option value="on">ON 🔊</option>
+        <option value="off">OFF 🔇</option>
+      </select>
+    </div>
+
+    <div class="setting-item">
+      <span>Theme Mode</span>
+      <select id="themeToggle" class="custom-select">
+        <option value="dark">Dark Theme 🌙</option>
+        <option value="neon">Neon Mode ⚡</option>
+      </select>
+    </div>
+
+    <!-- Single Save Button -->
+    <button id="saveBtn" class="save-btn">Save Changes</button>
+    
+    <!-- Toast Notification Message -->
+    <div id="toast" class="toast"></div>
+  </div>
+</div>
   <!-- JavaScript File -->
   <script src="script.js"></script>
 </body>
