@@ -182,25 +182,6 @@ if (saveBtn) {
   });
 }
 
-// Menu Toggle Functionality
-menuBtn = document.getElementById("menuBtn");
-const menuDropdown = document.getElementById("menu-dropdown");
-
-if (menuBtn && menuDropdown) {
-    menuBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        menuDropdown.classList.toggle("hidden");
-    });
-}
-
-document.addEventListener("click", (e) => {
-    if (menuDropdown && !menuDropdown.classList.contains("hidden")) {
-        if (!menuDropdown.contains(e.target) && e.target !== menuBtn) {
-            menuDropdown.classList.add("hidden");
-        }
-    }
-});
-
 // Load Profile & Settings Data on Page Load
 window.addEventListener('DOMContentLoaded', async () => {
   const usernameInput = document.getElementById('gamer-tag');
