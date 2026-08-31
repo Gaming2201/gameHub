@@ -154,10 +154,10 @@ const saveBtn = document.getElementById('saveBtn');
 
 if (saveBtn) {
   saveBtn.addEventListener('click', async () => {
-    const username = document.getElementById('usernameInput').value;
-    const email = document.getElementById('emailInput').value;
-    const soundPref = document.getElementById('soundToggle').value;
-    const themePref = document.getElementById('themeToggle').value;
+    const username = document.getElementById('gamer-tag').value;
+    const email = document.getElementById('email-address').value;
+    const soundPref = document.getElementById('game-sound').value;
+    const themePref = document.getElementById('theme-mode').value;
 
     if (!username || !email) {
       showToast("Please enter the Email & Username", true);
@@ -182,12 +182,31 @@ if (saveBtn) {
   });
 }
 
+// Menu Toggle Functionality
+menuBtn = document.getElementById("menuBtn");
+const menuDropdown = document.getElementById("menu-dropdown");
+
+if (menuBtn && menuDropdown) {
+    menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menuDropdown.classList.toggle("hidden");
+    });
+}
+
+document.addEventListener("click", (e) => {
+    if (menuDropdown && !menuDropdown.classList.contains("hidden")) {
+        if (!menuDropdown.contains(e.target) && e.target !== menuBtn) {
+            menuDropdown.classList.add("hidden");
+        }
+    }
+});
+
 // Load Profile & Settings Data on Page Load
 window.addEventListener('DOMContentLoaded', async () => {
-  const usernameInput = document.getElementById('usernameInput');
-  const emailInput = document.getElementById('emailInput');
-  const soundToggle = document.getElementById('soundToggle');
-  const themeToggle = document.getElementById('themeToggle');
+  const usernameInput = document.getElementById('gamer-tag');
+  const emailInput = document.getElementById('email-address');
+  const soundToggle = document.getElementById('game-sound');
+  const themeToggle = document.getElementById('theme-mode');
 
   if (window.db && window.doc && window.getDoc) {
     try {

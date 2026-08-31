@@ -149,9 +149,40 @@
 </script>
 <!-- Top Right Menu Button & Sidebar -->
 <div class="menu-container" style="position: fixed; top: 20px; right: 25px; z-index: 999;">
-  <div class="menu-btn" id="menuBtn" style="cursor: pointer; font-size: 20px; background: #0f3460; color: white; padding: 8px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-    ☰ Menu
-  </div>
+    <button id="menuBtn" class="menu-btn" style="cursor: pointer; font-size: 18px; background: #0f3460; color: white; padding: 8px 15px; border: none; border-radius: 6px;">☰ Menu</button>
+
+    <!-- Dropdown Container -->
+    <div id="menu-dropdown" class="menu-dropdown hidden">
+        <h3>Gamer Settings</h3>
+        
+        <div class="setting-item">
+            <label for="gamer-tag">Gamer Tag</label>
+            <input type="text" id="gamer-tag" placeholder="Enter gamer tag">
+        </div>
+
+        <div class="setting-item">
+            <label for="email-address">Email Address</label>
+            <input type="email" id="email-address" placeholder="Enter email">
+        </div>
+
+        <div class="setting-item">
+            <label for="game-sound">Game Sound</label>
+            <select id="game-sound">
+                <option>ON</option>
+                <option>OFF</option>
+            </select>
+        </div>
+
+        <div class="setting-item">
+            <label for="theme-mode">Theme Mode</label>
+            <select id="theme-mode">
+                <option>Dark Theme</option>
+                <option>Light Theme</option>
+            </select>
+        </div>
+
+        <button class="save-btn">Save Changes</button>
+    </div>
 </div>
 
 <!-- Premium Profile & Settings Sidebar -->
