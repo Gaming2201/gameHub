@@ -213,51 +213,9 @@ function update() {
     if (dist < 12) {
       playGameOverSound();
       showGameOverModal("GAME OVER");
-      // बटन्स को क्लिक या टच करने पर Pac-Man की दिशा बदलो
-document.getElementById('btn-up').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('up'); });
-document.getElementById('btn-down').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('down'); });
-document.getElementById('btn-left').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('left'); });
-document.getElementById('btn-right').addEventListener('touchstart', (e) => { e.preventDefault(); changeDirection('right'); });
-
-// Normal Click For Testing on PC
-document.getElementById('btn-up').addEventListener('click', () => changeDirection('up'));
-document.getElementById('btn-down').addEventListener('click', () => changeDirection('down'));
-document.getElementById('btn-left').addEventListener('click', () => changeDirection('left'));
-document.getElementById('btn-right').addEventListener('click', () => changeDirection('right'));
-
-// ==========================================
-// Mobile Touch Controls (Fix for Mobile Touch)
-// ==========================================
-const btnUp = document.getElementById('btn-up');
-const btnDown = document.getElementById('btn-down');
-const btnLeft = document.getElementById('btn-left');
-const btnRight = document.getElementById('btn-right');
-
-function triggerKey(keyName) {
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: keyName }));
-}
-
-if (btnUp && btnDown && btnLeft && btnRight) {
-    // Up Button
-    btnUp.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowUp'); });
-    btnUp.addEventListener('click', () => triggerKey('ArrowUp'));
-
-    // Down Button
-    btnDown.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowDown'); });
-    btnDown.addEventListener('click', () => triggerKey('ArrowDown'));
-
-    // Left Button
-    btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowLeft'); });
-    btnLeft.addEventListener('click', () => triggerKey('ArrowLeft'));
-
-    // Right Button
-    btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); triggerKey('ArrowRight'); });
-    btnRight.addEventListener('click', () => triggerKey('ArrowRight'));
-}
     }
   });
 }
-
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -315,41 +273,52 @@ function draw() {
 }
 
 // ==========================================
-// PC + MOBILE UNIVERSAL CONTROLS
+// MOBILE SWIPE CONTROLS
 // ==========================================
+let touchStartX = 0;
+let touchStartY = 0;
 
-function movePacman(directionKey) {
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: directionKey }));
-}
+window.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+}, { passive: true });
 
-const controls = [
-    { id: 'btn-up', key: 'ArrowUp' },
-    { id: 'btn-down', key: 'ArrowDown' },
-    { id: 'btn-left', key: 'ArrowLeft' },
-    { id: 'btn-right', key: 'ArrowRight' }
-];
+window.addEventListener('touchend', (e) => {
+    let touchEndX = e.changedTouches[0].clientX;
+    let touchEndY = e.changedTouches[0].clientY;
 
-controls.forEach(control => {
-    const btn = document.getElementById(control.id);
-    if (btn) {
-        // मोबाइल टच सपोर्ट
-        btn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            movePacman(control.key);
-        });
+    let diffX = touchEndX - touchStartX;
+    let diffY = touchEndY - touchStartY;
 
-        // PC माउस क्लिक सपोर्ट
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            movePacman(control.key);
-        });
+    if (Math.abs(diffX) > 30 || Math.abs(diffY) > 30) {
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) changeDirection('right');
+            else changeDirection('left');
+        } else {
+            if (diffY > 0) changeDirection('down');
+            else changeDirection('up');
+        }
     }
+}, { passive: true });
+
+// ==========================================
+// PC KEYBOARD CONTROLS
+// ==========================================
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') changeDirection('up');
+    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') changeDirection('down');
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') changeDirection('left');
+    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') changeDirection('right');
 });
 
+// ==========================================
+// GAME LOOP & START
+// ==========================================
 function gameLoop() {
-  update();
-  draw();
-  requestAnimationFrame(gameLoop);
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
 }
 
+// गेम शुरू करें
 gameLoop();
