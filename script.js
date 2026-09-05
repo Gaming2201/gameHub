@@ -101,24 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Sidebar Open/Close Logic
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('closeBtn');
+
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        sidebar.classList.add('active');
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+      });
+    }
 });
-
-// Sidebar Open/Close Logic
-const menuBtn = document.getElementById('menuBtn');
-const sidebar = document.getElementById('sidebar');
-const closeBtn = document.getElementById('closeBtn');
-
-if (menuBtn) {
-  menuBtn.addEventListener('click', () => {
-    sidebar.classList.add('active');
-  });
-}
-
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-  });
-}
 
 // ==========================================
 // AVATAR SELECTION & PROFILE LOGIC
@@ -182,42 +182,124 @@ if (saveBtn) {
   });
 }
 
-// Load Profile & Settings Data on Page Load
-window.addEventListener('DOMContentLoaded', async () => {
-  const usernameInput = document.getElementById('gamer-tag');
-  const emailInput = document.getElementById('email-address');
-  const soundToggle = document.getElementById('game-sound');
-  const themeToggle = document.getElementById('theme-mode');
+// ==========================================
+// 1. HTML एलिमेंट्स को सेलेक्ट करना
+// ==========================================
+const sidebar = document.getElementById('sidebar');
+const menuBtn = document.getElementById('menuBtn'); // या 'hamburger' / 'toggleBtn'
+const closeBtn = document.getElementById('closeBtn');
+const soundToggle = document.getElementById('soundToggle');
+const themeToggle = document.getElementById('themeToggle');
+const toast = document.getElementById('toast');
 
-  if (window.db && window.doc && window.getDoc) {
-    try {
-      const docRef = window.doc(window.db, "users", "user_profile");
-      const docSnap = await window.getDoc(docRef);
+// ==========================================
+// 2. मेन्यू बार (SIDEBAR) को खोलना और बंद करना
+// ==========================================
 
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        if (usernameInput) usernameInput.value = data.username || '';
-        if (emailInput) emailInput.value = data.email || '';
-        if (soundToggle) soundToggle.value = data.sound || 'on';
-        if (themeToggle) themeToggle.value = data.theme || 'dark';
+// जब यूजर मेन्यू/हैमबर्गर बटन पर क्लिक करे
+if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+        if (sidebar) sidebar.classList.add('active'); // साइडबार खोलेगा
+    });
+}
 
-        // Set Saved Avatar Active
-        if (data.avatar) {
-          selectedAvatar = data.avatar;
-          avatarImgs.forEach(img => {
-            if (img.getAttribute('data-avatar') === data.avatar) {
-              img.classList.add('selected');
-            } else {
-              img.classList.remove('selected');
-            }
-          });
-        }
-      }
-    } catch (error) {
-      console.error("Error loading profile: ", error);
+// जब यूजर क्लोज (X) बटन पर क्लिक करे
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        if (sidebar) sidebar.classList.remove('active'); // साइडबार बंद करेगा
+    });
+}
+
+// ==========================================
+// 3. स्क्रीन पर थीम (Dark / Neon) लागू करने का फ़ंक्शन
+// ==========================================
+function applyTheme(theme) {
+    if (theme === 'neon') {
+        document.body.classList.add('neon-theme');
+        document.body.classList.remove('dark-theme');
+    } else {
+        document.body.classList.add('dark-theme');
+        document.body.classList.remove('neon-theme');
     }
-  }
+}
+
+// ==========================================
+// 4. मैसेज (Toast) दिखाना
+// ==========================================
+function showToast(message) {
+    if (toast) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+}
+
+// ==========================================
+// 5. पेज लोड होते ही सेटिंग्स लोड करना
+// ==========================================
+window.addEventListener('DOMContentLoaded', async () => {
+    let savedTheme = 'dark';
+    let savedSound = 'on';
+
+    if (window.db && window.doc && window.getDoc) {
+        try {
+            const docRef = window.doc(window.db, "users", "user_profile");
+            const docSnap = await window.getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if (data.sound) savedSound = data.sound;
+                if (data.theme) savedTheme = data.theme;
+            }
+        } catch (error) {
+            console.error("Firebase data load error:", error);
+            savedTheme = localStorage.getItem('userTheme') || 'dark';
+            savedSound = localStorage.getItem('userSound') || 'on';
+        }
+    } else {
+        savedTheme = localStorage.getItem('userTheme') || 'dark';
+        savedSound = localStorage.getItem('userSound') || 'on';
+    }
+
+    if (soundToggle) soundToggle.value = savedSound;
+    if (themeToggle) themeToggle.value = savedTheme;
+
+    applyTheme(savedTheme);
 });
+
+// ==========================================
+// 6. 'Save Changes' बटन दबाने पर सेटिंग्स सेव करना
+// ==========================================
+if (saveBtn) {
+    saveBtn.addEventListener('click', async () => {
+        const selectedSound = soundToggle ? soundToggle.value : 'on';
+        const selectedTheme = themeToggle ? themeToggle.value : 'dark';
+
+        applyTheme(selectedTheme);
+
+        localStorage.setItem('userTheme', selectedTheme);
+        localStorage.setItem('userSound', selectedSound);
+
+        if (window.db && window.doc && window.setDoc) {
+            try {
+                const docRef = window.doc(window.db, "users", "user_profile");
+                await window.setDoc(docRef, {
+                    sound: selectedSound,
+                    theme: selectedTheme
+                }, { merge: true });
+            } catch (error) {
+                console.error("Firebase save error:", error);
+            }
+        }
+
+        showToast("Settings Saved Successfully!");
+        
+        // सेव होने के बाद साइडबार बंद कर दें
+        if (sidebar) sidebar.classList.remove('active');
+    });
+}
 
 // Load Profile Data from Firestore on Page Load
 window.addEventListener('DOMContentLoaded', async () => {
