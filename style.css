@@ -142,6 +142,7 @@ body {
 .card-icon.cyan { color: #00f3ff; filter: drop-shadow(0 0 12px #00f3ff); }
 .card-icon.purple { color: #b500ff; filter: drop-shadow(0 0 12px #b500ff); }
 .card-icon.gold { color: #ffbd00; filter: drop-shadow(0 0 12px #ffbd00); }
+.card-icon.blue { color: #00aaff; filter: drop-shadow(0 0 12px #00aaff); }
 
 /* Card Titles & Text */
 .game-card h3 {
@@ -577,7 +578,78 @@ footer {
 
 .menu-container {
   position: absolute !important;
-  top: 0;
+  top: 35px;
   right: 25px;
-  z-index: 999;
+  z-index: 1000;
+}
+
+.sidebar-links {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #24273c;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.sidebar-links:hover {
+    background: #6c5ce7;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* Sidebar Links Wrapper */
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 10px;
+}
+
+/* Sidebar Category Buttons Styling */
+.sidebar-links a {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    background-color: #24273c;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover Effect (Mouse over) */
+.sidebar-links a:hover {
+    background-color: #6c5ce7;
+    color: #ffffff;
+    transform: translateX(6px);
+    box-shadow: 0 6px 18px rgba(108, 92, 231, 0.4);
+    border-color: #a29bfe;
+}
+
+/* Active State Effect (When clicked) */
+.sidebar-links a:active {
+    transform: scale(0.98);
+}
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    color: #00f3ff;
+    transform: translateX(-4px);
 }
