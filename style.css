@@ -575,9 +575,16 @@ footer {
   right: 0 !important;
 }
 
-/* मेन्यू बटन को स्क्रीन के ऊपरी कोने में फ़िक्स करने के लिए */
-#menuBtn, .menu-container {
+/* मेन्यू बटन को मोबाइल और पीसी दोनों में सही जगह सेट करने के लिए */
+#menuBtn, .menu-btn {
     position: absolute !important;
-    top: 20px !important;
-    right: 20px !important;
+    top: 15px !important;
+    right: 15px !important;
+    z-index: 999 !important;
+}
+
+/* हेडर को अपनी सही जगह बनाए रखने के लिए */
+header, .menu-container {
+    position: relative !important;
+    width: 100% !important;
 }
