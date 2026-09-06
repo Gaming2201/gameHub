@@ -575,16 +575,9 @@ footer {
   right: 0 !important;
 }
 
-/* मेन्यू बटन को मोबाइल और पीसी दोनों में सही जगह सेट करने के लिए */
-#menuBtn, .menu-btn {
-    position: absolute !important;
-    top: 15px !important;
-    right: 15px !important;
-    z-index: 999 !important;
-}
-
-/* हेडर को अपनी सही जगह बनाए रखने के लिए */
-header, .menu-container {
-    position: relative !important;
-    width: 100% !important;
+.menu-container {
+  position: absolute !important;
+  top: 0;
+  right: 25px;
+  z-index: 999;
 }
