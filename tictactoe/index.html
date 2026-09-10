@@ -3,25 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cool Game</title>
+    <title>Ultimate Tic-Tac-Toe Game</title>
+    
+    <!-- CSS Link -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Tic Tac Toe Game</h1>
-    <div id="board" class="board">
-        <div class="cell" data-index="0"></div>
-        <div class="cell" data-index="1"></div>
-        <div class="cell" data-index="2"></div>
-        <div class="cell" data-index="3"></div>
-        <div class="cell" data-index="4"></div>
-        <div class="cell" data-index="5"></div>
-        <div class="cell" data-index="6"></div>
-        <div class="cell" data-index="7"></div>
-        <div class="cell" data-index="8"></div>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
     </div>
-    <h2 id="status">X ki baari hai</h2>
-    <button onclick="restartGame()">Restart Game</button>
 
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Tic-Tac-Toe <span>Pro</span></h1>
+            <p class="subtitle">Ultimate Gaming Experience</p>
+        </header>
+
+        <!-- Game Mode & Difficulty Controls -->
+        <section class="controls-card">
+            <div class="mode-selection">
+                <button id="pvpBtn" class="mode-btn active"><i class="fa-solid fa-users"></i> 2 Players</button>
+                <button id="aiBtn" class="mode-btn"><i class="fa-solid fa-robot"></i> VS AI</button>
+            </div>
+
+            <div class="difficulty-selection hidden" id="difficultyContainer">
+                <label for="difficulty">AI Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy 🟢</option>
+                    <option value="medium">Medium 🟡</option>
+                    <option value="hard" selected>Hard (Unbeatable) 🔴</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Scoreboard -->
+        <section class="scoreboard">
+            <div class="score-box player-x active" id="scoreBoxX">
+                <span class="player-name" id="labelX">Player X</span>
+                <span class="score" id="scoreX">0</span>
+            </div>
+            <div class="score-box ties">
+                <span class="player-name">Ties</span>
+                <span class="score" id="scoreTies">0</span>
+            </div>
+            <div class="score-box player-o" id="scoreBoxO">
+                <span class="player-name" id="labelO">Player O</span>
+                <span class="score" id="scoreO">0</span>
+            </div>
+        </section>
+
+        <!-- Turn Status Message -->
+        <div class="status-msg" id="statusMessage">Player X's Turn</div>
+
+        <!-- Tic Tac Toe 3x3 Grid Board -->
+        <main class="game-board" id="board">
+            <button class="cell" data-index="0" aria-label="Cell 1"></button>
+            <button class="cell" data-index="1" aria-label="Cell 2"></button>
+            <button class="cell" data-index="2" aria-label="Cell 3"></button>
+            <button class="cell" data-index="3" aria-label="Cell 4"></button>
+            <button class="cell" data-index="4" aria-label="Cell 5"></button>
+            <button class="cell" data-index="5" aria-label="Cell 6"></button>
+            <button class="cell" data-index="6" aria-label="Cell 7"></button>
+            <button class="cell" data-index="7" aria-label="Cell 8"></button>
+            <button class="cell" data-index="8" aria-label="Cell 9"></button>
+        </main>
+
+        <!-- Action Buttons -->
+        <footer class="action-buttons">
+            <button id="restartBtn" class="action-btn btn-restart"><i class="fa-solid fa-rotate-right"></i> Restart Round</button>
+            <button id="resetScoresBtn" class="action-btn btn-reset"><i class="fa-solid fa-trash"></i> Reset All Scores</button>
+        </footer>
+    </div>
+
+    <!-- Winner Announcement Modal -->
+    <div class="modal hidden" id="winModal">
+        <div class="modal-content">
+            <div class="trophy-icon"><i class="fa-solid fa-trophy"></i></div>
+            <h2 id="modalTitle">Congratulations!</h2>
+            <p id="modalMessage">Player X Won the Game!</p>
+            <button id="modalPlayAgainBtn" class="action-btn btn-restart">Play Next Round</button>
+        </div>
+    </div>
+
+    <!-- JS Link -->
     <script src="script.js"></script>
 </body>
 </html>

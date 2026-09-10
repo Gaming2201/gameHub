@@ -322,3 +322,95 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
+
+// LocalStorage से सेव किए गए फेवरेट गेम्स लोड करना
+function loadFavorites() {
+    let favorites = JSON.parse(localStorage.getItem('favGames')) || [];
+    
+    document.querySelectorAll('.game-card').forEach(card => {
+        let gameId = card.getAttribute('data-game-id');
+        let btn = card.querySelector('.fav-btn');
+        let icon = btn.querySelector('i');
+
+        if (favorites.includes(gameId)) {
+            btn.classList.add('active');
+            if (icon) {
+                icon.classList.remove('far');
+                icon.classList.add('fas'); // भरा हुआ लाल दिल
+            }
+        }
+    });
+}
+
+// LocalStorage se favorites list get karne ya initialize karne ke liye function
+function getFavorites() {
+  return JSON.parse(localStorage.getItem('favoriteGames')) || [];
+}
+
+// Heart click karne par favorite add/remove karne ka main logic
+function toggleFavorite(gameId) {
+  let favorites = getFavorites();
+
+  if (favorites.includes(gameId)) {
+    // Agar pehle se favorite hai, toh remove kar do
+    favorites = favorites.filter(id => id !== gameId);
+  } else {
+    // Agar favorite nahi hai, toh add kar do
+    favorites.push(gameId);
+  }
+
+  // Updated list ko LocalStorage mein save karein
+  localStorage.setItem('favoriteGames', JSON.stringify(favorites));
+
+  // Heart icon ka UI update karein
+  updateHeartUI(gameId);
+}
+
+// Page load hone par aur click hone par Heart Icon ka style update karne ke liye
+function updateHeartUI(gameId) {
+  const favorites = getFavorites();
+  const heartIcon = document.getElementById(`heart-${gameId}`);
+
+  if (heartIcon) {
+    if (favorites.includes(gameId)) {
+      heartIcon.innerHTML = '❤️'; // Red Heart jab favorite ho
+    } else {
+      heartIcon.innerHTML = '🤍'; // White Heart jab favorite na ho
+    }
+  }
+}
+
+// Page refresh/load hone par sabhi heart icons ki state update karna
+document.addEventListener('DOMContentLoaded', () => {
+  const favorites = getFavorites();
+  favorites.forEach(gameId => {
+    updateHeartUI(gameId);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const favorites = JSON.parse(localStorage.getItem('favoriteGames')) || [];
+  const container = document.getElementById('favorite-games-container');
+
+  if (favorites.length === 0) {
+    container.innerHTML = '<p>Koyi bhi favourite game add nahi kiya gaya hai.</p>';
+    return;
+  }
+
+  // Yahan favorites array mein saved saari IDs mil jayengi
+  console.log("Aapke favourite games ki IDs:", favorites);
+  
+  // Aap favorites array ke hisab se games ko display kar sakte hain
+});
+
+// Game Popup खोलने का फंक्शन
+function openGame(gameUrl) {
+    document.getElementById('game-frame').src = gameUrl;
+    document.getElementById('game-modal').style.display = 'flex';
+}
+
+// Game Popup बंद करने का फंक्शन
+function closeGame() {
+    document.getElementById('game-frame').src = '';
+    document.getElementById('game-modal').style.display = 'none';
+}
