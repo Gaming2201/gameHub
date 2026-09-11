@@ -760,3 +760,53 @@ footer {
     height: 100%;
     border: none;
 }
+
+/* 1. Card container ki position relative hona zaroori hai */
+.game-card {
+    position: relative; /* Isse button card ke andar hi rahega */
+}
+
+/* 2. Heart Button Style (Top-Right Corner) */
+.heart-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 4px 10px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease;
+}
+
+.heart-btn:hover {
+    transform: scale(1.08);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Active Liked State */
+.heart-btn.liked {
+    background: rgba(255, 50, 50, 0.2);
+    border-color: #ff4757;
+}
+
+.heart-icon {
+    font-size: 14px;
+    filter: grayscale(100%); /* Pehle white/grey dikhega */
+    transition: filter 0.2s;
+}
+
+.heart-btn.liked .heart-icon {
+    filter: grayscale(0%); /* Like hone par Red ho jayega */
+}
+
+.like-count {
+    font-weight: bold;
+    color: #fff;
+}

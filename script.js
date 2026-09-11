@@ -414,3 +414,150 @@ function closeGame() {
     document.getElementById('game-frame').src = '';
     document.getElementById('game-modal').style.display = 'none';
 }
+
+// 1. Like / Unlike Toggle Function
+function toggleLike(gameId) {
+    let likedGames = JSON.parse(localStorage.getItem('userLikedGames')) || [];
+    let countElement = document.getElementById(`count-${gameId}`);
+    let btnElement = document.getElementById(`btn-${gameId}`);
+    let currentLikes = parseInt(localStorage.getItem(`likes_${gameId}`)) || 0;
+
+    const isAlreadyLiked = likedGames.includes(gameId);
+
+    if (isAlreadyLiked) {
+        // UNLIKE: रिफ्रेश के बाद या दोबारा दबाने पर -1 होगा
+        currentLikes = Math.max(0, currentLikes - 1);
+        likedGames = likedGames.filter(id => id !== gameId);
+        if (btnElement) btnElement.classList.remove('liked');
+    } else {
+        // LIKE: पहली बार दबाने पर +1 होगा
+        currentLikes += 1;
+        likedGames.push(gameId);
+        if (btnElement) btnElement.classList.add('liked');
+    }
+
+    // Permanently Save in LocalStorage (रिफ्रेश के बाद भी रहेगा)
+    localStorage.setItem(`likes_${gameId}`, currentLikes);
+    localStorage.setItem('userLikedGames', JSON.stringify(likedGames));
+
+    // UI Update
+    if (countElement) countElement.innerText = currentLikes;
+}
+
+// 2. Refresh / Page Reload होने पर डेटा वापस लोड करने का ऑटोमैटिक फ़ंक्शन
+function loadSavedLikes() {
+    let likedGames = JSON.parse(localStorage.getItem('userLikedGames')) || [];
+    
+    // आपकी साइट के सभी गेम Buttons को ऑटोमैटिक ढूंढकर सिंक करेगा
+    const allButtons = document.querySelectorAll('.heart-btn');
+
+    allButtons.forEach(btn => {
+        // Button की ID से gameId निकालना (उदा: 'btn-tictactoe' -> 'tictactoe')
+        const gameId = btn.id.replace('btn-', '');
+        const countElement = document.getElementById(`count-${gameId}`);
+        const savedLikes = localStorage.getItem(`likes_${gameId}`) || 0;
+
+        // 1. लाइक की संख्या सेट करें
+        if (countElement) {
+            countElement.innerText = savedLikes;
+        }
+
+        // 2. अगर यूज़र ने पहले लाइक किया था, तो Red Heart वाला स्टेटस बनाकर रखें
+        if (likedGames.includes(gameId)) {
+            btn.classList.add('liked');
+        } else {
+            btn.classList.remove('liked');
+        }
+    });
+}
+
+// जैसे ही पेज लोड या रिफ्रेश हो, डेटा ऑटोमैटिक सिंक हो जाएगा
+document.addEventListener('DOMContentLoaded', loadSavedLikes);
+
+// ==========================================
+// 1. FIREBASE SETUP
+// ==========================================
+const firebaseConfig = {
+    apiKey: "AIzaSyBAqGukTau_tZ6fa3vCZg-np8FJlY0LyD0",
+    authDomain: "gamehub-6fbc6.firebaseapp.com",
+    databaseURL: "https://gamehub-6fbc6-default-rtdb.firebaseio.com",
+    projectId: "gamehub-6fbc6",
+    storageBucket: "gamehub-6fbc6.firebasestorage.app",
+    messagingSenderId: "586883385937",
+    appId: "1:586883385937:web:48417c2ff16f907b928670"
+};
+
+// Safe Firebase Initialization
+let database;
+if (typeof firebase !== 'undefined') {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    database = firebase.database();
+} else {
+    console.error("Firebase SDK load nahi hua hai. HTML me scripts check karein.");
+}
+// ==========================================
+// 2. SMART AUTOMATIC LIKE SYSTEM
+// ==========================================
+function setupAutomaticLikes() {
+    const cards = document.querySelectorAll('.game-card');
+
+    cards.forEach(card => {
+        // Card ke andar se game ka naam auto-detect karein (h3 tag se)
+        const h3 = card.querySelector('h3');
+        if (!h3) return;
+
+        // Clean ID banayein (Jaise: "Tic Tac Toe AI" -> "tictactoe-ai")
+        const gameId = h3.innerText.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+        // Agar button pehle se nahi hai, to automatic add karein
+        let btn = card.querySelector('.heart-btn');
+        if (!btn) {
+            btn = document.createElement('button');
+            btn.className = 'heart-btn';
+            btn.innerHTML = `<span class="heart-icon">❤️</span> <span class="like-count">0</span>`;
+            card.prepend(btn);
+        }
+
+        // Button click handler
+        btn.onclick = () => toggleAutoLike(gameId, btn);
+
+        // Individual Game Firebase Listener
+        database.ref('likes/' + gameId).on('value', snapshot => {
+            const countVal = snapshot.val() || 0;
+            const countSpan = btn.querySelector('.like-count');
+            if (countSpan) countSpan.innerText = countVal;
+            
+            // User status highlight
+            let likedGames = JSON.parse(localStorage.getItem('userLikedGames')) || [];
+            if (likedGames.includes(gameId)) {
+                btn.classList.add('liked');
+            } else {
+                btn.classList.remove('liked');
+            }
+        });
+    });
+}
+
+// Like/Unlike Function
+function toggleAutoLike(gameId, btn) {
+    let likedGames = JSON.parse(localStorage.getItem('userLikedGames')) || [];
+    const isLiked = likedGames.includes(gameId);
+    const gameRef = database.ref('likes/' + gameId);
+
+    if (isLiked) {
+        gameRef.transaction(curr => Math.max(0, (curr || 1) - 1));
+        likedGames = likedGames.filter(id => id !== gameId);
+        btn.classList.remove('liked');
+    } else {
+        gameRef.transaction(curr => (curr || 0) + 1);
+        likedGames.push(gameId);
+        btn.classList.add('liked');
+    }
+
+    localStorage.setItem('userLikedGames', JSON.stringify(likedGames));
+}
+
+// Page load hote hi automatic setup chalu
+document.addEventListener('DOMContentLoaded', setupAutomaticLikes);
