@@ -1,0 +1,182 @@
+/* ==========================================
+   GAME DETAILS PAGE - STYLING (Bgames Aesthetic)
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.detail-body {
+    background-color: #080f18;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+/* Header & Back Button */
+.detail-header {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    color: #00f2fe;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    background: rgba(0, 242, 254, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #00f2fe;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #00f2fe;
+    color: #000;
+}
+
+/* Container Box */
+.detail-card {
+    width: 100%;
+    max-width: 600px;
+    background: #0d1b2a;
+    border: 2px solid #00f2fe;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Game Banner Poster */
+.banner-wrapper {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.banner-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Play Now Big Neon Button */
+.play-now-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    background: #00f2fe;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+    transition: transform 0.2s;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.play-now-btn:hover {
+    transform: scale(1.02);
+}
+
+/* Title & Rating */
+.game-info {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.game-info h1 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.rating-stars {
+    color: #ffca28;
+    font-size: 16px;
+}
+
+/* Action Buttons (Share, Like, Dislike) */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    background: #1b263b;
+    border: 1px solid #00f2fe;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.action-btn:hover {
+    background: rgba(0, 242, 254, 0.2);
+}
+
+/* Description Box */
+.about-box {
+    width: 100%;
+    background: #1b263b;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.about-box h3 {
+    font-size: 14px;
+    color: #00f2fe;
+    margin-bottom: 8px;
+}
+
+.about-box p {
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.5;
+}
+
+/* Game Banner Poster Container */
+.banner-wrapper {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden; /* Photo box se bahar nahi jayegi */
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    background: #080f18; /* Khali jagah ke liye dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Image 100% Perfect Fit Inside Box */
+.banner-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Image bilkul nahi kategi aur box ke andar fit ho jayegi */
+    object-position: center !important;
+    display: block !important;
+    padding: 5px !important; /* Borders se thodi jagah banaye rakhega */
+    box-sizing: border-box !important;
+}

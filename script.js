@@ -558,6 +558,3 @@ function toggleAutoLike(gameId, btn) {
 
     localStorage.setItem('userLikedGames', JSON.stringify(likedGames));
 }
-
-// Page load hote hi automatic setup chalu
-document.addEventListener('DOMContentLoaded', setupAutomaticLikes);
