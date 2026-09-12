@@ -1,0 +1,71 @@
+ body {
+        background-image:url(/images/battleship-pictures-c75lvd8kvyd3zcpv.webp);
+        background-position: center;
+        background-size:cover ;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #game-area {
+  max-width: 1000px;         /* או כל רוחב שמתאים לך */
+  margin: 20px auto;        /* מרכוז אופקי */
+   display: flex;
+      justify-content: center;
+      gap: 40px;
+      border-radius: 1000mm;
+      padding: 20px;
+      transition: background-color 0.5s;
+ 
+}
+
+    .player-turn {
+      background-color: lightblue;
+    }
+    .ai-turn {
+      background-color: lightcoral;
+    }
+    table {
+      border-collapse: collapse;
+      table-layout: fixed
+
+    }
+    td {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #767575;
+      cursor: pointer;
+      background-color: #b0c4de;
+      font-size: 18px;
+      text-align: center;
+      vertical-align: middle;
+      box-sizing: border-box;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+    }
+    td.hit {
+      background-color: red;
+    }
+    td.miss {
+      background-color: white;
+    }
+    td.ship {
+      background-color: #555;
+    }
+    h2 {
+      margin-bottom: 5px;
+    }
+    #rules {
+      max-width: 600px;
+      margin: 10px auto;
+      text-align: left;
+      background-color: #a97c7c;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    #bump-section {
+      margin: 10px auto;
+    }
+    
+    
+
+   

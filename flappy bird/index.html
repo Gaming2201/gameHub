@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flappy Bird Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<audio id="bgMusic" src="bgm.mp3" loop></audio>
+
+<div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="main-menu" class="overlay">
+        <h1>FLAPPY BIRD</h1>
+        <div class="btn-container">
+            <button class="btn-play" id="btn-play">PLAY</button>
+            <button class="btn-settings" id="btn-settings">SETTINGS</button>
+            <button id="btn-sound">SOUND: ON</button>
+        </div>
+    </div>
+
+    <div id="settings-menu" class="overlay hidden">
+        <h1>SETTINGS</h1>
+        <div class="score-box">DIFFICULTY</div>
+        <div class="level-select">
+            <button class="btn-level active" id="btn-easy">EASY</button>
+            <button class="btn-level" id="btn-medium">MEDIUM</button>
+            <button class="btn-level" id="btn-hard">HARD</button>
+        </div>
+        <button class="btn-home" id="btn-settings-back">BACK</button>
+    </div>
+
+    <div id="game-over-menu" class="overlay hidden">
+        <h1>GAME OVER</h1>
+        <div class="score-box">SCORE: <span id="final-score">0</span></div>
+        <div class="score-box">BEST: <span id="best-score">0</span></div>
+        <div class="btn-container">
+            <button class="btn-replay" id="btn-replay">REPLAY</button>
+            <button class="btn-home" id="btn-gameover-home">HOME</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

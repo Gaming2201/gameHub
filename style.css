@@ -1,0 +1,1131 @@
+/* Core Page Reset & Base Setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #0d0f17;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient Glowing Background Effect 
+.bg-glow {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle, 
+    rgba(0, 243, 255, 0.12) 0%, 
+    rgba(181, 0, 255, 0.06) 45%, 
+    transparent 70%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Main Hub Container Layout */
+.hub-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Header & Glowing Logo Styling */
+.hub-header {
+  text-align: center;
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #ffffff;
+}
+
+.logo span {
+  color: #00f3ff;
+  text-shadow: 0 0 20px rgba(0, 243, 255, 0.8), 0 0 40px rgba(0, 243, 255, 0.4);
+}
+
+.logo-icon {
+  color: #00ff66;
+  margin-right: 12px;
+  filter: drop-shadow(0 0 10px #00ff66);
+}
+
+.tagline {
+  color: #a0a5b5;
+  font-size: 1.1rem;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* Responsive Games Grid Layout */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+/* Individual Game Card Styling */
+.game-card {
+  background: rgba(22, 27, 38, 0.75);
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  padding: 30px 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: left 0.5s ease;
+}
+
+.game-card:hover::before {
+  left: 100%;
+}
+
+.game-card:hover {
+  transform: translateY(-10px);
+  border-color: #00f3ff;
+  box-shadow: 0 15px 30px rgba(0, 243, 255, 0.25), inset 0 0 15px rgba(0, 243, 255, 0.1);
+}
+
+/* Card Icons Setup 
+.card-icon {
+  font-size: 2.8rem;
+  padding: 18px;
+  border-radius: 50%;
+  background: rgba(13, 15, 23, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+}
+
+.card-icon.cyan { color: #00f3ff; filter: drop-shadow(0 0 12px #00f3ff); }
+.card-icon.purple { color: #b500ff; filter: drop-shadow(0 0 12px #b500ff); }
+.card-icon.gold { color: #ffbd00; filter: drop-shadow(0 0 12px #ffbd00); }
+.card-icon.blue { color: #00aaff; filter: drop-shadow(0 0 12px #00aaff); }
+
+/* Card Titles & Text */
+.game-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+}
+
+.game-card p {
+  color: #a0a5b5;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Cyberpunk Interactive Buttons */
+.play-btn {
+  background: linear-gradient(135deg, #00f3ff, #0066ff);
+  color: #000000;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+}
+
+.play-btn.disabled {
+  background: #252b3b;
+  color: #636b7e;
+  box-shadow: none;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Footer Section */
+footer {
+  margin-top: 20px;
+  color: #5d6578;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ==========================================
+   SEARCH BAR & DROPDOWN LIST STYLING
+   ========================================== */
+.search-container {
+    position: relative;
+    margin: 20px auto 10px auto;
+    width: 100%;
+    max-width: 450px;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 242, 254, 0.3);
+    border-radius: 25px;
+    outline: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #00f2fe;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    background: rgba(15, 23, 42, 0.8);
+}
+
+/* Dropdown Menu */
+.search-dropdown {
+    position: absolute;
+    top: 105%;
+    left: 15px;
+    right: 15px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(0, 242, 254, 0.4);
+    border-radius: 12px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none; /* By default hidden rahega */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+/* Jab Dropdown open ho */
+.search-dropdown.active {
+    display: block;
+}
+
+/* List Items */
+.dropdown-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e2e8f0;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s ease;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 242, 254, 0.15);
+    color: #00f2fe;
+}
+
+/* Scrollbar Style */
+.search-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+.search-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(0, 242, 254, 0.5);
+    border-radius: 10px;
+}
+
+.search-container {
+    position: relative;
+    margin: 20px auto 10px auto;
+    width: 100%;
+    max-width: 450px;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    display: none;
+    z-index: 10;
+    transition: color 0.2s ease;
+}
+
+.clear-btn:hover {
+    color: #ff4757;
+}
+
+#searchInput {
+    padding-right: 45px;
+}
+
+/* GAME ICON CONTAINER AND IMAGE SIZE FIX */
+.card-icon {
+    position: relative;
+    width: 120px;  /* कंटेनर की चौड़ाई */
+    height: 120px; /* कंटेनर की ऊँचाई */
+    border-radius: 50%; /* इसे गोल बनाता है */
+    overflow: hidden; /* बाहर जाने वाली इमेज को काट देता है */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* बीच में सेट करता है */
+}
+
+/* IMAGE FIT INSIDE CONTAINER */
+.card-icon img {
+    width: 100%; /* इमेज की चौड़ाई गोल घेरे के बराबर */
+    height: 100%; /* इमेज की ऊँचाई गोल घेरे के बराबर */
+    object-fit: cover; /* इमेज को सही अनुपात में फिट करता है (स्ट्रेच नहीं करता) */
+}
+
+/* Sidebar Panel Styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 300px;
+  height: 100%;
+  background-color: #1a1a2e;
+  color: #fff;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  float: right;
+  cursor: pointer;
+}
+
+.profile-form {
+  margin-top: 40px;
+}
+
+.profile-form label {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.profile-form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background: #0f3460;
+  color: #fff;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 25px;
+  background-color: #e94560;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Toast Notification Style */
+.toast {
+  visibility: hidden;
+  min-width: 200px;
+  background-color: #2e7d32; /* हरा रंग success के लिए */
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.toast.error {
+  background-color: #d32f2f; /* लाल रंग error के लिए */
+}
+
+/* ==========================================
+   PREMIUM SIDEBAR & PROFILE SETTINGS STYLES
+   ========================================== */
+
+/* Sidebar Container with Blur Effect */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px; /* Hidden by default */
+  width: 320px;
+  height: 100%;
+  background: rgba(15, 15, 26, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  box-sizing: border-box;
+  transition: right 0.4s ease;
+  z-index: 1000;
+  overflow-y: auto;
+  color: #fff;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+/* Sidebar Title */
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #00f2fe;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+/* Section Title Styling */
+.section-title {
+  display: block;
+  font-size: 13px;
+  color: #ff007f;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* Avatar Selection Container */
+.avatar-options {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.avatar-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.avatar-img:hover {
+  transform: scale(1.1);
+}
+
+.avatar-img.selected {
+  border-color: #00f2fe;
+  box-shadow: 0 0 12px #00f2fe;
+  transform: scale(1.1);
+}
+
+/* Setting Dropdowns Layout */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.setting-item span {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.custom-select {
+  background: #16213e;
+  color: #00f2fe;
+  border: 1px solid #00f2fe;
+  padding: 5px 10px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Glowing Save Button */
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: linear-gradient(45deg, #ff007f, #7928ca);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 127, 0.6);
+}
+
+/* Toast Notification Styling */
+.toast {
+  visibility: hidden;
+  min-width: 100%;
+  background-color: #2e7d32;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 13px;
+  opacity: 0;
+  box-sizing: border-box;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.toast.error {
+  background-color: #d32f2f;
+}
+
+.sidebar {
+  position: fixed !important;
+  top: 0;
+  right: -350px !important;
+  width: 320px;
+  height: 100%;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  right: 0 !important;
+}
+
+.menu-container {
+  position: absolute !important;
+  top: 35px;
+  right: 25px;
+  z-index: 1000;
+}
+
+.sidebar-links {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #24273c;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.sidebar-links:hover {
+    background: #6c5ce7;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* Sidebar Links Wrapper */
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 10px;
+}
+
+/* Sidebar Category Buttons Styling */
+.sidebar-links a {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    background-color: #24273c;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover Effect (Mouse over) */
+.sidebar-links a:hover {
+    background-color: #6c5ce7;
+    color: #ffffff;
+    transform: translateX(6px);
+    box-shadow: 0 6px 18px rgba(108, 92, 231, 0.4);
+    border-color: #a29bfe;
+}
+
+/* Active State Effect (When clicked) */
+.sidebar-links a:active {
+    transform: scale(0.98);
+}
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    color: #00f3ff;
+    transform: translateX(-4px);
+}
+
+/* Popup Screen Overlay */
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Small Size Game Window */
+.modal-content {
+    background: #181a29;
+    width: 90%;
+    max-width: 800px; /* डिफ़ॉल्ट छोटा साइज़ */
+    height: 500px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Card container position (बटन को कोने में सेट करने के लिए ज़रूरी) */
+.game-card {
+    position: relative;
+}
+
+/* Favourite Heart Button */
+.fav-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    outline: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+    z-index: 10;
+}
+
+/* Hover effect */
+.fav-btn:hover {
+    background: rgba(0, 0, 0, 0.85);
+    transform: scale(1.1);
+}
+
+/* Heart Active (जब गेम फेवरेट में सेव हो जाए) */
+.fav-btn.active {
+    color: #ff4757;
+}
+
+/* Popup Screen */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content Container */
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    height: 80vh;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
+}
+
+/* Close Button (X) */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Iframe Frame */
+#game-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 1. Card container ki position relative hona zaroori hai */
+.game-card {
+    position: relative; /* Isse button card ke andar hi rahega */
+}
+
+/* 2. Heart Button Style (Top-Right Corner) */
+.heart-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 4px 10px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease;
+}
+
+.heart-btn:hover {
+    transform: scale(1.08);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Active Liked State */
+.heart-btn.liked {
+    background: rgba(255, 50, 50, 0.2);
+    border-color: #ff4757;
+}
+
+.heart-icon {
+    font-size: 14px;
+    filter: grayscale(100%); /* Pehle white/grey dikhega */
+    transition: filter 0.2s;
+}
+
+.heart-btn.liked .heart-icon {
+    filter: grayscale(0%); /* Like hone par Red ho jayega */
+}
+
+.like-count {
+    font-weight: bold;
+    color: #fff;
+}
+
+/* ==========================================
+   BGAMES STYLE CLEAN GRID & CARDS
+   ========================================== */
+
+/* Main Container */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Base Card Style */
+.game-card {
+    background: #0d1b2a;
+    border: 2px solid #00f2fe;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 190px; /* Fixed Height to fix stretch issues */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+}
+
+/* Image / Wallpaper Styling */
+.game-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Title Bar Below Wallpaper */
+.game-card h3 {
+    color: #ffffff;
+    font-size: 13px;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 8px 4px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #1b263b;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Position Heart/Like Button on Top Right Corner */
+.heart-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 4px 8px;
+    color: #fff;
+    font-size: 12px;
+    z-index: 10;
+}
+
+/* Mobile Screen Layout (1 Line Me 2 Cards) */
+@media (max-width: 768px) {
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .game-card {
+        height: 160px;
+    }
+
+    .game-card img {
+        height: 120px;
+    }
+
+    .game-card h3 {
+        font-size: 11px;
+        height: 40px;
+    }
+}
+
+/* ==========================================
+   FULL WALLPAPER CARD WITH BOTTOM TITLE (BGAMES)
+   ========================================== */
+
+.game-card {
+    position: relative;
+    width: 100%;
+    height: 180px; /* Card ki fixed height */
+    border-radius: 12px;
+    border: 2px solid #00f2fe;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    background: #000;
+}
+
+/* 1. Image poore box par fit hogi 
+.game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 2. Game ka Naam Box me sabse niche aayega */
+.game-card h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 8px 4px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)); /* Dhaandhla Black Gradient */
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+}
+
+/* 3. Heart/Like button top-right me hi rahega */
+.heart-btn, .like-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 5;
+}
+
+/* Mobile responsive (2-Column Layout) */
+@media (max-width: 768px) {
+    .games-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 8px !important;
+    }
+
+    .game-card {
+        height: 150px;
+    }
+
+    .game-card h3 {
+        font-size: 11px;
+        padding: 6px 2px;
+    }
+}
+
+/* Game Card Box Styling */
+.game-card {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    border-radius: 12px;
+    border: 2px solid #00f2fe;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    background: #0d1b2a;
+}
+
+/* Image Full Coverage 
+.game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Bottom Title Overlay */
+.game-card h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 8px 4px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+}
+
+/* Hide Unwanted Extra Text Paragraphs */
+.game-card p {
+    display: none !important;
+}
+
+/* Card Container */
+.game-card {
+    position: relative;
+    width: 100%;
+    height: 160px; /* Card ki fixed height */
+    border-radius: 12px;
+    border: 2px solid #00f2fe;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    background: #0d1b2a; /* Dark background taaki image ke aaspas khali jagah achhi lage */
+}
+
+/* 100% FIXED IMAGE CSS (Bina kate puri image dikhegi) */
+.game-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Isse koi bhi badi image box ke andar puri fit ho jayegi aur kategi nahi */
+    object-position: center !important;
+    display: block !important;
+    padding: 10px 10px 35px 10px; /* Upar, side aur niche title ke liye space */
+    box-sizing: border-box !important;
+}
+
+/* Bottom Title Overlay */
+.game-card h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 8px 4px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+}
+
+/* Card Box Container */
+.game-card {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    border-radius: 12px;
+    border: 2px solid #00f2fe;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    background: #0d1b2a;
+}
+
+/* Image Ko Poore Box Me Bina Kate Full Cover Karne Ke Liye 
+.game-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+    object-position: center !important;
+    display: block !important;
+    padding: 0 !important; 
+    margin: 0 !important;
+}
+
+/* Bottom Title Bar */
+.game-card h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 8px 4px;
+    background: rgba(0, 0, 0, 0.8); /* Translucent Black Strip */
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+}
+/*
+.game-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    background: none !important;
+}*/
+
+/* Image Box Size Alignment */
+.game-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Poore box ko fill karega */
+    padding: 2px !important;      /* Box se halki si jagah chhodega */
+    box-sizing: border-box !important;
+    border-radius: 10px !important; /* Border ke saath corners perfectly curve honge */
+    display: block !important;
+}
