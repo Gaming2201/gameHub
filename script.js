@@ -540,21 +540,3 @@ function setupAutomaticLikes() {
     });
 }
 
-// Like/Unlike Function
-function toggleAutoLike(gameId, btn) {
-    let likedGames = JSON.parse(localStorage.getItem('userLikedGames')) || [];
-    const isLiked = likedGames.includes(gameId);
-    const gameRef = database.ref('likes/' + gameId);
-
-    if (isLiked) {
-        gameRef.transaction(curr => Math.max(0, (curr || 1) - 1));
-        likedGames = likedGames.filter(id => id !== gameId);
-        btn.classList.remove('liked');
-    } else {
-        gameRef.transaction(curr => (curr || 0) + 1);
-        likedGames.push(gameId);
-        btn.classList.add('liked');
-    }
-
-    localStorage.setItem('userLikedGames', JSON.stringify(likedGames));
-}

@@ -125,25 +125,6 @@ body {
   box-shadow: 0 15px 30px rgba(0, 243, 255, 0.25), inset 0 0 15px rgba(0, 243, 255, 0.1);
 }
 
-/* Card Icons Setup 
-.card-icon {
-  font-size: 2.8rem;
-  padding: 18px;
-  border-radius: 50%;
-  background: rgba(13, 15, 23, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 80px;
-}
-
-.card-icon.cyan { color: #00f3ff; filter: drop-shadow(0 0 12px #00f3ff); }
-.card-icon.purple { color: #b500ff; filter: drop-shadow(0 0 12px #b500ff); }
-.card-icon.gold { color: #ffbd00; filter: drop-shadow(0 0 12px #ffbd00); }
-.card-icon.blue { color: #00aaff; filter: drop-shadow(0 0 12px #00aaff); }
-
 /* Card Titles & Text */
 .game-card h3 {
   font-family: 'Orbitron', sans-serif;
@@ -1128,4 +1109,26 @@ footer {
     box-sizing: border-box !important;
     border-radius: 10px !important; /* Border ke saath corners perfectly curve honge */
     display: block !important;
+}
+
+.background-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-size: 90% 90%; /* इसी नंबर से इमेज छोटी-बड़ी होगी */
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
+}
+
+body {
+    background-color: #080c14; /* डिफ़ॉल्ट डार्क fallback */
+}
+
+/* मेन कार्ड्स के पीछे का हिस्सा हल्का ट्रांसपेरेंट रखें ताकि बैकग्राउंड इमेज दिखे */
+.hub-container {
+    background: transparent !important;
 }
