@@ -180,3 +180,73 @@ body.detail-body {
     padding: 5px !important; /* Borders se thodi jagah banaye rakhega */
     box-sizing: border-box !important;
 }
+
+.action-btn.liked {
+    background-color: #ff4757 !important;
+    border-color: #ff4757 !important;
+    color: #ffffff !important;
+}
+
+/* QR Modal Popup Styles */
+.qr-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.qr-modal-content {
+    background: #0f172a;
+    border: 1px solid #e5a93c;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(229, 169, 60, 0.3);
+}
+
+.qr-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.qr-modal-content h2 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.qr-modal-content img {
+    border-radius: 8px;
+    border: 3px solid #e5a93c;
+    margin: 10px 0;
+}
+
+.qr-modal-content p {
+    color: #cbd5e1;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.qr-copy-btn {
+    background: #e5a93c;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
