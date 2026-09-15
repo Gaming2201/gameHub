@@ -540,3 +540,36 @@ function setupAutomaticLikes() {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+
+  if (!themeBtn || !themeIcon) return;
+
+  // LocalStorage check for saved theme
+  const savedTheme = localStorage.getItem('site-theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeIcon.textContent = '☀️';
+  } else {
+    themeIcon.textContent = '🌙';
+  }
+
+  // Toggle Action
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+
+    themeIcon.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('site-theme', isLight ? 'light' : 'dark');
+  });
+});
+
+// Example Loader Script
+function hideSkeleton() {
+  const skeletons = document.querySelectorAll('.skeleton-card');
+  skeletons.forEach(el => el.style.display = 'none');
+}
+
+// Page load hone par skeleton hata dein
+window.addEventListener('load', hideSkeleton);

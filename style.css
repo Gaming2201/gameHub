@@ -903,14 +903,6 @@ footer {
     background: #000;
 }
 
-/* 1. Image poore box par fit hogi 
-.game-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
 /* 2. Game ka Naam Box me sabse niche aayega */
 .game-card h3 {
     position: absolute;
@@ -969,14 +961,6 @@ footer {
     text-decoration: none;
     display: block;
     background: #0d1b2a;
-}
-
-/* Image Full Coverage 
-.game-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
 }
 
 /* Bottom Title Overlay */
@@ -1061,17 +1045,6 @@ footer {
     background: #0d1b2a;
 }
 
-/* Image Ko Poore Box Me Bina Kate Full Cover Karne Ke Liye 
-.game-card img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; 
-    object-position: center !important;
-    display: block !important;
-    padding: 0 !important; 
-    margin: 0 !important;
-}
-
 /* Bottom Title Bar */
 .game-card h3 {
     position: absolute;
@@ -1091,14 +1064,6 @@ footer {
     text-overflow: ellipsis;
     z-index: 2;
 }
-/*
-.game-card img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    border-radius: 0 !important;
-    background: none !important;
-}*/
 
 /* Image Box Size Alignment */
 .game-card img {
@@ -1131,4 +1096,156 @@ body {
 /* मेन कार्ड्स के पीछे का हिस्सा हल्का ट्रांसपेरेंट रखें ताकि बैकग्राउंड इमेज दिखे */
 .hub-container {
     background: transparent !important;
+}
+
+/* ==========================================
+   GAME HUB - DARK & LIGHT THEME (NO PURE WHITE)
+   ========================================== */
+
+/* 1. DEFAULT DARK MODE (Neon Cyan Gamer Theme) */
+:root {
+  --bg-main: #0b0f19;          /* Deep Dark Space Background */
+  --card-bg: #151d30;          /* Dark Navy Card BG */
+  --card-border: #00f2fe;      /* Neon Cyan Border */
+  --text-main: #ffffff;        /* White Text */
+  --text-sub: #94a3b8;         /* Muted Text */
+  --header-title: #00f2fe;     /* Neon Blue Header */
+  --btn-bg: rgba(255, 255, 255, 0.15);
+}
+
+/* 2. LIGHT MODE (Soft Ice Slate - Pure White Deleted) */
+body.light-mode {
+  --bg-main: #cdd9e6;          /* Soft Ice-Blue Slate (Not White) */
+  --card-bg: #b0c4de;          /* Soft Slate Blue Card BG */
+  --card-border: #0284c7;      /* Deep Cyan Border */
+  --text-main: #0f172a;        /* Dark Slate Text */
+  --text-sub: #334155;         /* Dark Muted Text */
+  --header-title: #0369a1;     /* Royal Blue Title */
+  --btn-bg: rgba(0, 0, 0, 0.12);
+}
+
+/* Page Background & Text */
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header & Tagline */
+.hub-header h1, .logo span {
+  color: var(--header-title) !important;
+}
+
+.tagline {
+  color: var(--text-sub) !important;
+}
+
+/* Game Cards Styling */
+.game-card, .card {
+  background-color: var(--card-bg) !important;
+  border: 2px solid var(--card-border) !important;
+  color: var(--text-main) !important;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.game-card:hover {
+  box-shadow: 0 0 15px var(--card-border);
+  transform: translateY(-4px);
+}
+
+/* Search Bar Fix */
+.search-container input,
+#searchInput {
+  background-color: var(--card-bg) !important;
+  color: var(--text-main) !important;
+  border: 2px solid var(--card-border) !important;
+}
+
+/* Toggle Button Style */
+.theme-btn {
+  display: inline-block;
+    padding: 10px 20px;
+    background: #24273c;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Skeleton Card Layout */
+.skeleton-card {
+  width: 100%;
+  height: 180px;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Shimmer Animation Effect */
+.skeleton-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 255, 255, 0.15) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ==========================================
+   FULL-WIDTH THEME TOGGLE BUTTON STYLING
+   ========================================== */
+
+.theme-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;                  /* बाकी ऑप्शंस की तरह पूरा लम्बा/चौड़ा */
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+/* Hover Effect (बाकी लिस्ट जैसा glow) */
+.theme-nav-btn:hover {
+  background: rgba(0, 242, 254, 0.15);
+  color: #00f2fe;
+  border-color: #00f2fe;
+  transform: translateX(-3px);  /* हल्का सा स्लाइड इफेक्ट */
+}
+
+/* Icon size inside the button */
+#themeIcon {
+  font-size: 1.2rem;
 }
